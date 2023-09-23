@@ -89,6 +89,8 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           env:
+            - name: LOG_LEVEL
+              value: '0'
             - name: NAMESPACE
               valueFrom:
                 fieldRef:
