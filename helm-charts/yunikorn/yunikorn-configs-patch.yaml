@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: yunikorn-configs
+  namespace: yunikorn
+data:
+  queues.yaml: |
+    partitions:
+      - name: default
+        queues:
+        - name: root
+          queues:
+          - name: default
+            submitacl: '*'
+            properties:
+              application.sort.policy: fifo
+              application.sort.priority: enabled
+              priority.policy: default
+              priority.offset: "0"
+          - name: sandbox
+            submitacl: '*'
+            properties:
+              application.sort.policy: fifo
+              application.sort.priority: enabled
+              priority.policy: default
+              priority.offset: "0"
