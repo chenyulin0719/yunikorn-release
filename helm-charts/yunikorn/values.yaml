@@ -77,8 +77,8 @@ admissionController:
 
 web:
   image:
-    repository: apache/yunikorn
-    tag: web-1.3.0
+    repository: kh87313/yunikorn
+    tag: web-amd64-latest
     pullPolicy: Always
   resources:
     requests:
