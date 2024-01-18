@@ -24,14 +24,14 @@ hostNetwork: false
 priorityClassName: ""
 
 image:
-  repository: apache/yunikorn
-  tag: scheduler-latest
-  pullPolicy: Always
+  repository: local/yunikorn
+  tag: scheduler-amd64-latest
+  pullPolicy: IfNotPresent
 
 pluginImage:
-  repository: apache/yunikorn
-  tag: scheduler-plugin-latest
-  pullPolicy: Always
+  repository: local/yunikorn
+  tag: scheduler-plugin-amd64-latest
+  pullPolicy: IfNotPresent
 
 nodeSelector: {}
 tolerations: []
@@ -44,9 +44,9 @@ placeHolderImage: null # deprecated; use service.placeholderImage in yunikornDef
 admissionController:
   priorityClassName: ""
   image:
-    repository: apache/yunikorn
-    tag: admission-latest
-    pullPolicy: Always
+    repository: local/yunikorn
+    tag: admission-amd64-latest
+    pullPolicy: IfNotPresent
   replicaCount: 1
   serviceAccount: yunikorn-admission-controller
   hostNetwork: true
@@ -71,9 +71,12 @@ admissionController:
 
 web:
   image:
-    repository: apache/yunikorn
-    tag: web-latest
-    pullPolicy: Always
+    # repository: apache/yunikorn
+    # tag: web-1.3.0
+    # pullPolicy: Always
+    repository: local/yunikorn
+    tag: web-amd64-latest
+    pullPolicy: IfNotPresent
   resources:
     requests:
       cpu: 100m
