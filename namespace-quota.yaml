@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: spark
+  annotations:
+    yunikorn.apache.org/namespace.quota: "{\"cpu\": \"20\", \"memory\": \"30G\"}"
+
+---
+
+# apiVersion: v1
+# kind: ResourceQuota
+# metadata:
+#   name: spark-quota
+#   namespace: spark
+# spec:
+#   hard:
+#     requests.cpu: "1" # Total CPU requests across all pods
+#     requests.memory: 2Gi # Total memory requests across all pods
+#     limits.cpu: "2" # Total CPU limits across all pods
+#     limits.memory: 4Gi # Total memory limits across all pods
+#     pods: "10" # Total number of pods
+#     services: "5" # Total number of services
+#     persistentvolumeclaims: "4" # Total number of PVCs
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: yunikorn-configs
+  namespace: yunikorn
+data:
+  log.level: "DEBUG"
+  queues.yaml: |
+    partitions:
+      - name: default
+        placementrules:
+          - name: tag
+            value: namespace
+            create: true
+        queues:
+        - name: root
+          submitacl: '*'
+          properties:
+            application.sort.policy: fifo
+
