@@ -79,7 +79,11 @@ spec:
       {{- end }}
       containers:
         - name: yunikorn-admission-controller
+          {{ if .Values.version}}
+          image: "{{ .Values.admissionController.image.repository }}:{{ .Values.admissionController.image.tag | replace "latest" .Values.version }}"
+          {{ else  }}
           image: "{{ .Values.admissionController.image.repository }}:{{ .Values.admissionController.image.tag }}"
+          {{ end}}
           imagePullPolicy: {{ .Values.admissionController.image.pullPolicy }}
           resources:
             requests:

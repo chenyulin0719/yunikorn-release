@@ -23,6 +23,8 @@ hostNetwork: false
 
 priorityClassName: ""
 
+version: "1.5.2" # if set, will replace the substring 'latest' in image tag with this version number
+
 image:
   repository: apache/yunikorn
   tag: scheduler-latest
